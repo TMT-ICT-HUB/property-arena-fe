@@ -1,5 +1,5 @@
 // src/components/SideBar.tsx
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   FaTachometerAlt,
   FaPlusCircle,
@@ -14,6 +14,7 @@ import {
   FaSignOutAlt,
   FaHome,
 } from 'react-icons/fa';
+import { useAuthStore } from '@/store/authStore';
 
 const tabs = [
   { name: 'Home', icon: <FaHome />, route: '/' },
@@ -26,14 +27,20 @@ const tabs = [
   { name: 'Profile', icon: <FaUser />, route: '/profile' },
   { name: 'My Website', icon: <FaGlobe />, route: '/my-website' },
   { name: 'My Messages', icon: <FaEnvelope />, route: '/messages' },
-  { name: 'Favourites', icon: <FaHeart />, route: '/favourites' },
-  { name: 'Signout', icon: <FaSignOutAlt />, route: '/signout' },
+  { name: 'Favourites', icon: <FaHeart />, route: '/favourites' },  
 ];
 
 const SideBar: React.FC = () => {
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   return (
     <div className="bg-black w-64 text-white min-h-screen">
-      <div className="logo h-12 mb-8 flex items-center text-black">
+      <div className="logo h-12 mb-8 flex items-center bg-white text-black">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
           alt="Logo"
@@ -60,6 +67,13 @@ const SideBar: React.FC = () => {
             </NavLink>
           ))}
         </nav>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-4 py-2 w-full rounded-md text-white hover:bg-gray-800 transition-colors"
+        >
+          <span className="text-lg"><FaSignOutAlt /></span>
+          <span className="text-sm font-medium">Signout</span>
+        </button>
       </div>
     </div>
   );
