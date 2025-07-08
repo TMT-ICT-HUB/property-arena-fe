@@ -32,7 +32,7 @@ const tabs = [
 
 const SideBar: React.FC = () => {
   return (
-    <div className="bg-black w-64 text-white min-h-screen p-4">
+    <div className="bg-black w-64 text-white min-h-screen">
       <div className="logo h-fit mb-8 flex items-center text-black">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
@@ -41,24 +41,26 @@ const SideBar: React.FC = () => {
         />
         <span className="text-xl font-extrabold text-primary-red">PropertyArena</span>
       </div>
-      <nav className="space-y-2">
-        {tabs.map((tab) => (
-          <NavLink
-            key={tab.route}
-            to={tab.route}
-            end
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-2 w-full rounded-md transition-colors
-               ${isActive
-                ? 'bg-white text-black'
-                : 'hover:bg-gray-800 text-white'}`
-            }
-          >
-            <span className="text-lg">{tab.icon}</span>
-            <span className="text-sm font-medium">{tab.name}</span>
-          </NavLink>
-        ))}
-      </nav>
+      <div className="p-4">
+        <nav className="space-y-2">
+          {tabs.map((tab) => (
+            <NavLink
+              key={tab.route}
+              to={tab.route}
+              end
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-2 w-full rounded-md transition-colors
+                ${isActive
+                  ? 'bg-white text-black'
+                  : 'hover:bg-gray-800 text-white'}`
+              }
+            >
+              <span className="text-lg">{tab.icon}</span>
+              <span className="text-sm font-medium">{tab.name}</span>
+            </NavLink>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 };
