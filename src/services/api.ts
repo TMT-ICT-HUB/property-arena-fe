@@ -1,12 +1,14 @@
 import { useAuthStore } from '../store/authStore';
 
-const BASE_URL = import.meta.env.VITE_API_URL as string;
+// const BASE_URL = import.meta.env.VITE_API_URL as string;
 
 export class APIError extends Error {
   public status: number;
   public statusText: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public response?: any;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(message: string, status: number, statusText: string, response?: any) {
     super(message);
     this.name = 'APIError';

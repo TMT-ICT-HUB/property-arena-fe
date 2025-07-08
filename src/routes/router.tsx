@@ -7,7 +7,7 @@ import NotFound from '../pages/Notfound';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import SignUp from '@/pages/Signup';
 import MainLayout from '@/layouts/MainLayouts';
-import CreateProperty from '@/pages/CreateProperty';
+import CreateProperty from '@/pages/create-property/CreateProperty';
 
 const withMainLayout = (
   <MainLayout>
@@ -44,7 +44,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/create-property',
-        element: <CreateProperty />,
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <CreateProperty />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/secret',

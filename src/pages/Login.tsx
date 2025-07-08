@@ -66,7 +66,7 @@ const Login: React.FC = () => {
               className="px-3"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? "" : ""}
             </button>
           </div>
         </label>
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition disabled:opacity-50"
+          className="w-full bg-primary-red text-white py-2 rounded hover:bg-secondary-red transition disabled:opacity-50"
         >
           {loading ? "Logging in…" : "Login"}
         </button>

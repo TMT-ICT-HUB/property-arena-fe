@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary-green: #61ba48;
+  --color-primary-green-hover: #4da73a;
+  --color-primary-red: #d31513;
+  /* --color-primary-red: #901a19; */
+  --color-secondary-red: #901a19;
+  /* --color-secondary-red: #cf6969; */
+}

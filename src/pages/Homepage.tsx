@@ -19,13 +19,13 @@ const HomePage: React.FC = () => {
         onClick={() =>
           requireAuth(handleSecretThing)
         }
-        className="px-4 py-2 bg-blue-600 text-white rounded"
+        className="px-4 py-2 bg-primary-red text-white rounded"
       >
         Do Something Secret
       </button>
       <ProtectedButton
         onAuthClick={handleSecretThing}
-        className="px-4 py-2 bg-blue-600 text-white rounded"
+        className="px-4 py-2 bg-primary-red text-white rounded"
       >
         Do Something Secret
       </ProtectedButton>

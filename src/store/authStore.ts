@@ -45,7 +45,9 @@ export const useAuthStore = create<AuthState>()(
               auth: false,
             }
           );
-          set({ accessToken: data.accessToken, user: data.user });
+          console.log("Data: ", data)
+          console.log("Token: ", data.data.tokens.accessToken)
+          set({ accessToken: data.data.tokens.accessToken, user: data.data.user });
         } catch (err: any) {
           if (err.status >= 400 && err.status < 500) {
             set({ error: err.message });
