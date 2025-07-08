@@ -33,7 +33,7 @@ const tabs = [
 const SideBar: React.FC = () => {
   return (
     <div className="bg-black w-64 text-white min-h-screen">
-      <div className="logo h-fit mb-8 flex items-center text-black">
+      <div className="logo h-12 mb-8 flex items-center text-black">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
           alt="Logo"
