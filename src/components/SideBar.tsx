@@ -33,8 +33,13 @@ const tabs = [
 const SideBar: React.FC = () => {
   return (
     <div className="bg-black w-64 text-white min-h-screen p-4">
-      <div className="logo h-32 mb-8">
-        {/* your logo here */}
+      <div className="logo h-fit mb-8 flex items-center text-black">
+        <img
+          src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
+          alt="Logo"
+          className="h-12 w-12 object-contain"
+        />
+        <span className="text-xl font-extrabold text-primary-red">PropertyArena</span>
       </div>
       <nav className="space-y-2">
         {tabs.map((tab) => (
