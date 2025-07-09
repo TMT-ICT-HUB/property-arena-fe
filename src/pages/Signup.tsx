@@ -42,7 +42,17 @@ const SignUp: React.FC = () => {
   const displayError = formError || error;
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray-100 flex-col">
+      <div className="logo">
+        <div className="logo h-12 mb-8 flex items-center bg-white text-black">
+          <img
+            src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
+            alt="Logo"
+            className="h-12 w-12 object-contain"
+          />
+          <span className="text-xl font-extrabold text-primary-red">PropertyArena</span>
+        </div>
+      </div>
       <form
         onSubmit={onSubmit}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"

@@ -11,6 +11,7 @@ export const API_ROUTES = {
   CHANGE_PASSWORD: `${BASE_URL}/auth/change-password`,
   CREATE_PROPERTY: `${BASE_URL}/properties`,
   GET_PROPERTY: `${BASE_URL}/properties`,
+  GET_USER_PROPERTY: `${BASE_URL}/properties/user`,
   UPDATE_PROPERTY: `${BASE_URL}/properties`,
   DELETE_PROPERTY: `${BASE_URL}/properties`,
 };

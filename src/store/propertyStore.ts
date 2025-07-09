@@ -3,7 +3,6 @@ import { devtools } from 'zustand/middleware';
 // import { PropertyFormData } from '@/types';
 import { PROPERTY_SERVICE } from '@/services/property';
 import { PropertyFormData } from '@/types/property';
-import { MediaItem } from '@/components/property/PropertyGalleryStep';
 
 interface PropertyStore {
   // Form data state

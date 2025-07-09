@@ -45,7 +45,7 @@ const CreateProperty = () => {
 
   return (
     <div className="flex justify-center mt-24">
-      <div className="main-con w-[80%] bg-white shadow-lg rounded-md">
+      <div className="main main-con-style">
         <div className="">
           <h1 className="text-2xl font-semibold mb-6 p-4">Post Property</h1>
           <StepTopBar
@@ -166,16 +166,12 @@ const CreateProperty = () => {
                   </select>
                 </FormFieldBox>
                 <FormFieldBox label="Location" >
-                  <select
+                  <input
                     className="w-full shadow-md p-2 rounded-md"
                     value={formData.location}
                     onChange={e => handleInputChange('location', e.target.value)}
                     // disabled={true}
-                  >
-                    <option value="Available" > Available </option>
-                    < option value="Sold" > Sold </option>
-                    < option value="Rented" > Rented </option>
-                  </select>
+                  />
                 </FormFieldBox>
                 <FormFieldBox label="Bedroom" >
                   <select

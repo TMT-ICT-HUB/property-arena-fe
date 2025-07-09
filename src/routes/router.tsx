@@ -8,6 +8,8 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 import SignUp from '@/pages/Signup';
 import MainLayout from '@/layouts/MainLayouts';
 import CreateProperty from '@/pages/create-property/CreateProperty';
+import PropertyList from '@/pages/list-property/ListProperty';
+import ListUserProperty from '@/pages/list-property/ListUserProperty';
 
 const withMainLayout = (
   <MainLayout>
@@ -40,13 +42,21 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <HomePage />,
+        element: <PropertyList />,
       },
       {
         path: '/create-property',
         element: (
           <ProtectedRoute fallback={<div>Loading…</div>}>
             <CreateProperty />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/my-listing',
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <ListUserProperty />
           </ProtectedRoute>
         ),
       },
