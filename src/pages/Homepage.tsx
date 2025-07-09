@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
 
   const handleSecretThing = () => {
     // protected action
-    console.log('You unlocked the secret!');
+    console.log('secret!');
   };
   
   return (

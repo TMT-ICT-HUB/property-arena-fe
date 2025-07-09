@@ -45,8 +45,6 @@ export const useAuthStore = create<AuthState>()(
               auth: false,
             }
           );
-          console.log("Data: ", data)
-          console.log("Token: ", data.data.tokens.accessToken)
           set({ accessToken: data.data.tokens.accessToken, user: data.data.user });
         } catch (err: any) {
           if (err.status >= 400 && err.status < 500) {
@@ -63,7 +61,6 @@ export const useAuthStore = create<AuthState>()(
 
       signup: async (name, email, password) => {
         set({ loading: true, error: null });
-        console.log("Name in signup auth: ", name)
         try {
           await API(
             `${BASE_URL}/auth/signup`,

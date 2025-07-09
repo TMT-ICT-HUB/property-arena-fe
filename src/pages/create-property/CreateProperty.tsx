@@ -171,7 +171,7 @@ const CreateProperty = () => {
                     value={formData.location}
                     onChange={e => handleInputChange('location', e.target.value)}
                     // disabled={true}
-                  />
+                  />conso
                 </FormFieldBox>
                 <FormFieldBox label="Bedroom" >
                   <select

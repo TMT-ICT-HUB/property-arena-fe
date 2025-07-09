@@ -76,13 +76,9 @@ export const usePropertyStore = create<PropertyStore>()(
         set({ isSubmitting: true });
 
         try {
-          console.log("Form data: ", formData)
           const response = await PROPERTY_SERVICE.createProperty({
             propertyData: formData
           });
-
-          // Handle successful submission
-          console.log('Property created successfully:', response);
 
           // Reset form or redirect
           get().resetForm();
