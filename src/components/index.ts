@@ -1,3 +1,3 @@
 export * from './ProtectedButton'
-export * from './Topbar'
-export * from './Sidebar'
+export * from './TopBar'
+export * from './SideBar'
