@@ -10,6 +10,7 @@ import MainLayout from '@/layouts/MainLayouts';
 import CreateProperty from '@/pages/create-property/CreateProperty';
 import PropertyList from '@/pages/list-property/ListProperty';
 import ListUserProperty from '@/pages/list-property/ListUserProperty';
+import Dashboard from '@/pages/dashboard/Dashboard';
 
 const withMainLayout = (
   <MainLayout>
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <PropertyList />,
+        element: <Dashboard />,
       },
       {
         path: '/create-property',
