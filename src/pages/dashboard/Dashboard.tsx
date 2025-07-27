@@ -1,6 +1,7 @@
 import DashboardProductList from '@/components/dashboad/DashboardProductList'
 import GraphCard from '@/components/dashboad/GraphCard'
 import PropertyCard from '@/components/dashboad/PropertyCard'
+import SubSection from '@/components/dashboad/SubSection'
 import React from 'react'
 
 const Dashboard: React.FC = () => {
@@ -51,10 +52,12 @@ const Dashboard: React.FC = () => {
 
 
       </div>
-      <div className="sub w-[15rem]">
+      {/* <div className="sub w-[15rem]">
         <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 1</div>
         <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 2</div>
-      </div>
+        <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 3</div>
+      </div> */}
+      <SubSection />
     </div>
   )
 }

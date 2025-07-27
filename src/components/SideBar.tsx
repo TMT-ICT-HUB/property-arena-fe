@@ -51,14 +51,14 @@ const SideBar: React.FC<SideBarProps> = ({onClose}) => {
         </button>
       </div>
 
-      <div className="logo h-12 mb-8 flex items-center bg-white text-black px-4">
+      {/* <div className="logo h-12 mb-8 flex items-center bg-white text-black px-4">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
           alt="Logo"
           className="h-12 w-12 object-contain"
         />
         <span className="text-xl font-extrabold text-primary-red ml-2">PropertyArena</span>
-      </div>
+      </div> */}
       <div className="logo h-12 mb-8 flex items-center bg-white text-black">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
