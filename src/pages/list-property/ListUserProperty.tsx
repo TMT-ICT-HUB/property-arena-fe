@@ -1,7 +1,8 @@
 import { PROPERTY_SERVICE } from "@/services/property";
-import { PropertyFormData } from "@/types/property";
+import { PropertyData, PropertyFormData } from "@/types/property";
 import { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface Meta {
   total: number;
@@ -13,7 +14,7 @@ interface Meta {
 }
 
 const ListUserProperty = () => {
-    const [properties, setProperties] = useState<PropertyFormData[]>([]);
+    const [properties, setProperties] = useState<PropertyData[]>([]);
     const [meta, setMeta] = useState<Meta | null>(null);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -29,7 +30,7 @@ const ListUserProperty = () => {
   
           const res: any = await PROPERTY_SERVICE.getUserProperties(page, LIMIT);
           const list = Array.isArray(res.data) ? res.data : [];
-          setProperties(list as PropertyFormData[]);
+          setProperties(list as PropertyData[]);
           setMeta(res.meta);
         } catch (err: any) {
           console.error(err);
@@ -76,33 +77,45 @@ const ListUserProperty = () => {
                 key={prop.propertyId ?? idx}
                 className="w-full sm:w-[48%] bg-white shadow-md rounded-lg overflow-hidden"
               >
-                {prop.media?.[0]?.url && (
-                  <img
+
+                <Link to={`/properties/${prop.id}`}>
+                <div className="cursor-pointer">
+                  {prop.media?.[0]?.url && (
+                    <img
                     src={prop.media[0].url}
                     alt={prop.title}
                     className="w-full h-52 object-cover"
-                  />
-                )}
-  
-                <div className="p-4">
-                  <div className="text-red-600 font-bold text-lg">
-                    ₦{prop.price.toLocaleString()}
-                  </div>
-                  {prop.pricePostfixText && (
-                    <div className="text-sm text-gray-500 mb-2">
-                      {prop.pricePostfixText}
-                    </div>
+                    />
                   )}
-                  <div className="text-xl font-bold text-black mb-2">
-                    {prop.title}
-                  </div>
-                  <p className="text-gray-700 mb-3">{prop.description}</p>
-                  {prop.location && (
-                    <div className="flex items-center text-sm text-gray-600 mt-2">
-                      <FaMapMarkerAlt className="mr-2 text-red-500" />
-                      {prop.location}
+                  <div className="p-4">
+                    <div className="text-red-600 font-bold text-lg">
+                      ₦{prop.price.toLocaleString()}
                     </div>
-                  )}
+                    {prop.priceFrequency && (
+                      <div className="text-sm text-gray-500 mb-2">
+                        {prop.priceFrequency}
+                      </div>
+                    )}
+                    <div className="text-xl font-bold text-black mb-2">
+                      {prop.title}
+                    </div>
+                    <p className="text-gray-700 mb-3">{prop.description}</p>
+                    {prop.location && (
+                      <div className="flex items-center text-sm text-gray-600 mt-2">
+                        <FaMapMarkerAlt className="mr-2 text-red-500" />
+                        {prop.location}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                </Link>
+                <div className="p-4 pt-0 flex justify-end">
+                  <Link
+                    to={`/properties/${prop.id}/edit`}
+                    className="text-sm bg-primary-red text-white px-4 py-2 rounded hover:bg-blue-700"
+                  >
+                    Edit
+                  </Link>
                 </div>
               </div>
             ))}

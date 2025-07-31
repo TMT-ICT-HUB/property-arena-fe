@@ -21,8 +21,10 @@ interface AuthState {
   error: string | null;
 
   login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
+  signup: (name: string, email: string, password: string, role: string) => Promise<void>;
   logout: () => void;
+
+  setUser: (user: any | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -59,7 +61,7 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      signup: async (name, email, password) => {
+      signup: async (name, email, password, role) => {
         set({ loading: true, error: null });
         try {
           await API(
@@ -67,7 +69,7 @@ export const useAuthStore = create<AuthState>()(
             {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, email, password }),
+              body: JSON.stringify({ name, email, password, role }),
               auth: false,
             }
           );
@@ -87,6 +89,11 @@ export const useAuthStore = create<AuthState>()(
       logout: () => {
         set({ accessToken: null, user: null });
       },
+
+      setUser: (user) => {
+        set({ user });
+      },
+
     }),
     {
       name: 'auth',

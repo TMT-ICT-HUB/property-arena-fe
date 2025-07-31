@@ -1,17 +1,19 @@
-import { FaBell, FaChevronDown } from 'react-icons/fa';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FaBell, FaChevronDown, FaSearch } from 'react-icons/fa';
 import { useAuth } from '@/hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ROLE_ENUM } from '@/constants';
 import { useLayoutMode } from '@/hooks/useLayoutMode';
 
-const Topbar = () => {
+const NavBar = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { layoutMode, setLayoutMode } = useLayoutMode();
+  const navigate = useNavigate();
 
   const toggleDropdown = () => setIsModalOpen((prev) => !prev);
   const closeDropdown = () => setIsModalOpen(false);
+  const { setLayoutMode } = useLayoutMode();
 
   const ALLOWED_MAIN_LAYOUT_ROLES = [
     ROLE_ENUM.ADMIN,
@@ -20,24 +22,51 @@ const Topbar = () => {
     ROLE_ENUM.DEVELOPER,
   ];
 
-  const canSwitchLayout = isAuthenticated && ALLOWED_MAIN_LAYOUT_ROLES.includes(user?.role);
+  const canAccessMainLayout = isAuthenticated && ALLOWED_MAIN_LAYOUT_ROLES.includes(user?.role);
 
-  const handleSwitchLayout = () => {
-    setLayoutMode(layoutMode === 'main' ? 'user' : 'main');
+  const handleSwitchToMainLayout = () => {
+    setLayoutMode('main');    // Switch to Main layout
     closeDropdown();
+    navigate('/dashboard'); // or '/dashboard' or wherever you want
   };
 
-  return (
-    <div className="h-12 bg-black text-white px-6 shadow relative z-50">
-      <div className="flex justify-between items-center h-12">
-        <div className="text-xl font-semibold"></div>
 
+  return (
+    <div className="h-16 bg-white text-white px-6 shadow-lg relative z-50 rounded-md">
+      <div className="flex justify-between items-center h-full">
+        {/* Logo */}
+        <div className="flex items-center bg-white text-black gap-2">
+          <img
+            src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
+            alt="Logo"
+            className="h-12 w-12 object-contain"
+          />
+          <span className="text-xl font-extrabold text-primary-red">PropertyArena</span>
+        </div>
+
+        {/* Search Bar - Centered */}
+        <div className="flex-grow px-10">
+          <div className="relative max-w-md">
+            <input
+              name='search'
+              type="text"
+              placeholder="Search properties..."
+              className="w-full pr-12 pl-4 py-2 rounded-md border-[8px] text-black border-primary-green focus:outline-none focus:ring-2 focus:ring-primary-green"
+            />
+            <div className="absolute h-full right-0 top-1/2 -translate-y-1/2 bg-primary-green p-2 rounded-md flex items-center">
+              <FaSearch className="text-white text-[20px]" />
+            </div>
+          </div>
+
+        </div>
+
+        {/* Right Side - User / Auth Links */}
         <div className="flex items-center gap-6">
           {isAuthenticated ? (
             <>
-              <button className="relative">
+              <button className="relative text-primary-green">
                 <FaBell className="text-xl" />
-                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
+                <span className="absolute top-0 right-0 w-2 h-2 bg-primary-red rounded-full" />
               </button>
 
               <div className="relative">
@@ -70,13 +99,15 @@ const Topbar = () => {
                       >
                         My Profile
                       </Link>
-                      {canSwitchLayout && (
+
+                      {/* Conditionally show switch to main layout */}
+                      {canAccessMainLayout && (
                         <button
+                          onClick={handleSwitchToMainLayout}
+                          className="text-sm bg-primary-red text-white px-4 py-2 rounded hover:bg-secondary-red"
                           type="button"
-                          onClick={handleSwitchLayout}
-                          className="text-left text-sm font-semibold bg-primary-green text-white hover:bg-primary-green-hover px-2 py-1 rounded"
                         >
-                          Switch to {layoutMode === 'main' ? 'User' : 'Main'} Layout
+                          Switch to Post Property
                         </button>
                       )}
                       <button
@@ -103,7 +134,7 @@ const Topbar = () => {
               </Link>
               <Link
                 to="/signup"
-                className="text-sm bg-blue-600 px-4 py-1 rounded hover:bg-blue-700"
+                className="text-sm bg-primary-red px-4 py-1 rounded hover:bg-secondary-red"
               >
                 Sign Up
               </Link>
@@ -112,7 +143,7 @@ const Topbar = () => {
         </div>
       </div>
 
-      {/* Click outside to close modal (optional enhancement) */}
+      {/* Overlay to close modal */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-40"
@@ -123,4 +154,4 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default NavBar;

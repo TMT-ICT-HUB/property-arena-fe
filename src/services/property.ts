@@ -18,7 +18,6 @@ const createProperty = async (data: CreatePropertyRequest): Promise<CreateProper
 const getPropertyById = async (id: string) => {
   return API(`${API_ROUTES.GET_PROPERTY}/${id}`, {
     method: 'GET',
-    auth: true
   });
 };
 
@@ -26,7 +25,6 @@ const getProperties = async (page=1, limit=10) => {
   // NOTE: adjust the query param names to match your backend
   return API(`${API_ROUTES.GET_PROPERTY}?page=${page}&limit=${limit}`, {
     method: 'GET',
-    auth: true,
   });
 };
 
@@ -39,7 +37,7 @@ const getUserProperties = async (page= 1, limit= 10) => {
 
 const updateProperty = async (id: string, data: Partial<PropertyFormData>) => {
   return API(`${API_ROUTES.UPDATE_PROPERTY}/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     auth: true,
     body: JSON.stringify(data)
   });

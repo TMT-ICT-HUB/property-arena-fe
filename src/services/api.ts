@@ -35,9 +35,11 @@ export const API = async (
   const response = await fetch(input, { ...rest, headers });
 
   if (response.status === 401) {
-    useAuthStore.getState().logout();
-    window.location.reload();
-    return;
+    // useAuthStore.getState().logout();
+    // window.location.reload();
+    // return;
+
+    throw new APIError('Unauthorized', 401, 'Unauthorized');
   }
 
   if (!response.ok) {

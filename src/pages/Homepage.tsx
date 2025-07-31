@@ -21,13 +21,13 @@ const HomePage: React.FC = () => {
         }
         className="px-4 py-2 bg-primary-red text-white rounded"
       >
-        Do Something Secret
+        Homepage
       </button>
       <ProtectedButton
         onAuthClick={handleSecretThing}
         className="px-4 py-2 bg-primary-red text-white rounded"
       >
-        Do Something Secret
+        Homepage
       </ProtectedButton>
     </div>
   );

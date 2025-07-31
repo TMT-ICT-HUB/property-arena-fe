@@ -1,4 +1,5 @@
 interface StepTopBarProps {
+  mode?: 'create' | 'edit';
   activeStep: string;
   setActiveStep: (step: string) => void;
   canProceedToStep?: (step: string) => boolean;
@@ -6,20 +7,31 @@ interface StepTopBarProps {
 
 const steps = ["Basic", "Gallery", "Features", "Agent & Review"];
 
-const StepTopBar = ({ activeStep, setActiveStep, canProceedToStep }: StepTopBarProps) => {
+const StepTopBar = ({ mode = 'create', activeStep, setActiveStep, canProceedToStep }: StepTopBarProps) => {
   const currentStepIndex = steps.indexOf(activeStep);
 
   const handleStepClick = (step: string, index: number) => {
-    // Allow clicking on current step or previous steps
+    // In edit mode: allow clicking any step
+    if (mode === 'edit') {
+      setActiveStep(step);
+      return;
+    }
+
+    // In create mode: check progression
     if (index <= currentStepIndex) {
       setActiveStep(step);
       return;
     }
 
-    // For future steps, check if user can proceed
     if (canProceedToStep && canProceedToStep(step)) {
       setActiveStep(step);
     }
+  };
+
+  const isStepClickable = (step: string, index: number) => {
+    if (mode === 'edit') return true;
+    if (index <= currentStepIndex) return true;
+    return canProceedToStep ? canProceedToStep(step) : false;
   };
 
   const getStepStatus = (step: string, index: number) => {
@@ -27,11 +39,32 @@ const StepTopBar = ({ activeStep, setActiveStep, canProceedToStep }: StepTopBarP
     if (index === currentStepIndex) return 'active';
     return 'pending';
   };
+// const StepTopBar = ({ activeStep, setActiveStep, canProceedToStep }: StepTopBarProps) => {
+//   const currentStepIndex = steps.indexOf(activeStep);
 
-  const isStepClickable = (step: string, index: number) => {
-    if (index <= currentStepIndex) return true;
-    return canProceedToStep ? canProceedToStep(step) : false;
-  };
+//   const handleStepClick = (step: string, index: number) => {
+//     // Allow clicking on current step or previous steps
+//     if (index <= currentStepIndex) {
+//       setActiveStep(step);
+//       return;
+//     }
+
+//     // For future steps, check if user can proceed
+//     if (canProceedToStep && canProceedToStep(step)) {
+//       setActiveStep(step);
+//     }
+//   };
+
+//   const getStepStatus = (step: string, index: number) => {
+//     if (index < currentStepIndex) return 'completed';
+//     if (index === currentStepIndex) return 'active';
+//     return 'pending';
+//   };
+
+//   const isStepClickable = (step: string, index: number) => {
+//     if (index <= currentStepIndex) return true;
+//     return canProceedToStep ? canProceedToStep(step) : false;
+//   };
 
   return (
     <div className="flex space-x-4 bg-black shadow-md p-4 rounded-md mb-6">

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 // import { PropertyFormData } from '@/types';
 import { PROPERTY_SERVICE } from '@/services/property';
-import { PropertyFormData } from '@/types/property';
+import { AREA_MEASUREMENT, CURRENCY_TYPE, LISTING_PURPOSE, PROPERTY_STATUS, PROPERTY_TYPE, PropertyFormData } from '@/types/property';
 
 interface PropertyStore {
   // Form data state
@@ -21,29 +21,40 @@ interface PropertyStore {
   canProceedToStep: (step: string) => boolean;
 }
 
+
 const initialFormData: PropertyFormData = {
   title: '',
-  propertyType: '',
-  address: '',
   description: '',
   price: 0,
+  currency: CURRENCY_TYPE.NGN,
   oldPrice: 0,
-  pricePrefixText: 'For Sale',
-  pricePostfixText: '',
-  propertyId: '',
-  status: 'For Sale',
-  landAreaPostfix: '',
-  garagesOrParkingSpaces: 0,
-  landArea: 0,
+  priceFrequency: '',
+  isIntallmentPaymentAllowed: false,
+
+  propertyType: PROPERTY_TYPE.HOUSE,
+  listingPurpose: LISTING_PURPOSE.SALE,
+  status: PROPERTY_STATUS.AVAILABLE,
+
+  address: '',
+
+  landArea: '',
+  landAreaMeasurement: AREA_MEASUREMENT.SQM,
+
+  garagesOrParkingSpaces: '',
   location: '',
   bedroom: '',
-  media: [],
+
   features: [],
-  agentId: '',
+  media: [],
+  document: [],
+
+  agent: '',
+  selectedAgent: '',
+
   reviewNotes: '',
   agentDisplayOption: 'none',
-  selectedAgentId: '',
 };
+
 
 export const usePropertyStore = create<PropertyStore>()(
   devtools(
@@ -76,24 +87,24 @@ export const usePropertyStore = create<PropertyStore>()(
         set({ isSubmitting: true });
 
         try {
-          const response = await PROPERTY_SERVICE.createProperty({
-            propertyData: formData
-          });
+          if (formData.id) {
+            // EDIT MODE
+            await PROPERTY_SERVICE.updateProperty(formData.id, formData);
+          } else {
+            // CREATE MODE
+            await PROPERTY_SERVICE.createProperty({
+              propertyData: formData,
+            });
+          }
 
-          // Reset form or redirect
           get().resetForm();
-
-          // You might want to navigate to the property page or show success message
-          // window.location.href = `/property/${response.id}`;
-
         } catch (error) {
-          console.error('Failed to create property:', error);
+          console.error('Failed to submit property:', error);
           throw error;
         } finally {
           set({ isSubmitting: false });
         }
       },
-
       // Validation helpers
       isStepValid: (step) => {
         const { formData } = get();
@@ -105,10 +116,16 @@ export const usePropertyStore = create<PropertyStore>()(
               formData.address.trim() !== '' &&
               formData.description.trim() !== '' &&
               formData.price > 0 &&
-              formData.pricePrefixText.trim() !== '' &&
-              formData.pricePostfixText.trim() !== '' &&
-              formData.propertyId.trim() !== '' &&
+              // formData.oldPrice !== 0 &&
+              formData.currency.trim() !== '' &&
+              // formData.priceFrequency.trim() !== '' &&
+              formData.listingPurpose.trim() !== '' &&
               formData.status.trim().toLowerCase() !== '' &&
+              // formData.location.trim().toLowerCase() !== '' &&
+              // formData.bedroom.trim().toLowerCase() !== '' &&
+              // formData.landArea.trim().toLowerCase() !== '' &&
+              // formData.landAreaMeasurement.trim().toLowerCase() !== '' &&
+              // formData.garagesOrParkingSpaces.trim().toLowerCase() !== '' &&
               formData.propertyType.trim().toLowerCase() !== ''
             );
           case 'Gallery':

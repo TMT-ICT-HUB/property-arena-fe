@@ -60,7 +60,7 @@ const PropertyFeaturesStep: React.FC<PropertyFeaturesStepProps> = ({ features, o
         <button
           type="button"
           onClick={addFeature}
-          className="px-4 py-2 bg-primary-green text-white rounded-md hover:bg-primary-green-hover disabled:opacity-50"
+          className="px-4 py-2 bg-primary-red text-white rounded-md hover:bg-secondary-red disabled:opacity-50"
           disabled={!inputValue.trim()}
         >
           Add

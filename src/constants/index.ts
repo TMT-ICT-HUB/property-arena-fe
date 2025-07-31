@@ -15,3 +15,18 @@ export const API_ROUTES = {
   UPDATE_PROPERTY: `${BASE_URL}/properties`,
   DELETE_PROPERTY: `${BASE_URL}/properties`,
 };
+
+export enum ROLE_ENUM {
+  ADMIN = "admin",
+  USER = "user",
+  AGENT = "agent",
+  DEVELOPER = "developer",
+  LANDLORD = "landlord",
+}
+
+export type LayoutMode = 'main' | 'user';
+
+export interface LayoutModeContextType {
+  layoutMode: LayoutMode;
+  setLayoutMode: (mode: LayoutMode) => void;
+}

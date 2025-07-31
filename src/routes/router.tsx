@@ -10,12 +10,17 @@ import MainLayout from '@/layouts/MainLayouts';
 import CreateProperty from '@/pages/create-property/CreateProperty';
 import PropertyList from '@/pages/list-property/ListProperty';
 import ListUserProperty from '@/pages/list-property/ListUserProperty';
+import EditPropertyPage from '@/pages/EditProperty';
+import PropertyDetailPage from '@/pages/PropertyDetail';
+import LayoutSwitcher from '@/layouts/LayoutSwitcher';
+import Profile from '@/pages/profile/Profile';
+import EditProfile from '@/pages/profile/EditProfile';
 
-const withMainLayout = (
-  <MainLayout>
-    <Outlet />
-  </MainLayout>
-);
+// const withMainLayout = (
+//   <MainLayout>
+//     <Outlet />
+//   </MainLayout>
+// );
 
 export const router = createBrowserRouter([
 
@@ -34,11 +39,11 @@ export const router = createBrowserRouter([
 
   // Main layout routes
   {
-    element: withMainLayout,
+    element: <LayoutSwitcher />,
     children: [
       {
         path: '/',
-        element: <HomePage />,
+        element: <PropertyList />,
       },
       {
         path: '/dashboard',
@@ -57,6 +62,38 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute fallback={<div>Loading…</div>}>
             <ListUserProperty />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/profile/',
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/edit-profile/',
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <EditProfile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/properties/:propertyId",
+        element: (
+          // <ProtectedRoute fallback={<div>Loading…</div>}>
+          // </ProtectedRoute>
+            <PropertyDetailPage />
+        ),
+      },
+      {
+        path: "/properties/:propertyId/edit",
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <EditPropertyPage />
           </ProtectedRoute>
         ),
       },

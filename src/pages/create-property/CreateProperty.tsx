@@ -4,6 +4,15 @@ import PropertyGalleryStep from "@/components/property/PropertyGalleryStep";
 import PropertyFeaturesStep from "@/components/property/PropertyFeatureStep";
 import PropertyAgentReviewStep from "@/components/property/PropertyAgentReviewStep";
 import FormFieldBox from "@/components/FormField";
+import { useNavigate } from "react-router-dom";
+import { AREA_MEASUREMENT, LISTING_PURPOSE, PRICE_FREQUENCY, PROPERTY_STATUS, PROPERTY_TYPE } from "@/types";
+import { useState } from "react";
+import { CurrencyFieldWithToggle } from "@/components/dropdowns/CurrencyDropdown";
+import MeasurementInputWithDropdown from "@/components/dropdowns/MeasurementDropdown";
+import { CURRENCY_TYPE } from "@/types";
+import CustomSelect from "@/components/dropdowns/CustomSelect";
+import { enumToSelectOptions } from "@/utils/enumToSelectOptions";
+import { BEDROOM_OPTIONS } from "@/types/options";
 
 const CreateProperty = () => {
   const {
@@ -16,6 +25,8 @@ const CreateProperty = () => {
     isStepValid,
     canProceedToStep
   } = usePropertyStore();
+  const navigate = useNavigate();
+
 
   const steps = ['Basic', 'Gallery', 'Features', 'Agent & Review'];
   const currentStepIndex = steps.indexOf(currentStep);
@@ -36,6 +47,8 @@ const CreateProperty = () => {
   const handleSubmit = async () => {
     try {
       await submitProperty();
+      navigate("/my-listing")
+
       // Handle success (show toast, redirect, etc.)
     } catch (error) {
       // Handle error (show error message, etc.)
@@ -64,7 +77,7 @@ const CreateProperty = () => {
                  <FormFieldBox label="Property Title" fullWidth>
                    <input
                      type="text"
-                    className="w-full shadow-md p-2 rounded-md"
+                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                      value={formData.title}
                     onChange={e => handleInputChange('title', e.target.value)}
                      placeholder="e.g. Spacious Apartment"
@@ -74,7 +87,7 @@ const CreateProperty = () => {
                  <FormFieldBox label="Address" fullWidth>
                    <input
                      type="text"
-                     className="w-full shadow-md p-2 rounded-md"
+                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                      value={formData.address}
                      onChange={e => handleInputChange('address', e.target.value)}
                      placeholder="Property address"
@@ -83,7 +96,7 @@ const CreateProperty = () => {
               
                  <FormFieldBox label="Description" fullWidth>
                    <textarea
-                     className="w-full shadow-md p-2 rounded-md"
+                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                      rows={4}
                      value={formData.description}
                      onChange={e => handleInputChange('description', e.target.value)}
@@ -95,7 +108,7 @@ const CreateProperty = () => {
               {/* 3 Columns Grid */}
 
               <div className="flex flex-wrap gap-4" >
-                <FormFieldBox label="Sale or Rent Price">
+                {/* <FormFieldBox label="Sale or Rent Price">
                   <input
                     type="number"
                     className="w-full shadow-md p-2 rounded-md"
@@ -103,116 +116,95 @@ const CreateProperty = () => {
                     onChange={e => handleInputChange('price', Number(e.target.value))}
                     placeholder="e.g. 500000"
                   />
+                </FormFieldBox> */}
+
+                <div className="form-fields-row">
+                  <FormFieldBox label="Sale or Rent Price">
+                    <CurrencyFieldWithToggle
+                      value={formData.price || ''}
+                      currency={formData.currency || 'NGN'}
+                      currencyOptions={Object.values(CURRENCY_TYPE)}
+                      onValueChange={(price: number) => handleInputChange('price', price)}
+                      onCurrencyChange={(currency: string) => handleInputChange('currency', currency)}
+                      placeholder="e.g. 500000"
+                    />
+                  </FormFieldBox>
+                  <FormFieldBox label="Old Price">
+                    <CurrencyFieldWithToggle
+                      value={formData.oldPrice || ''}
+                      currency={formData.currency || 'NGN'}
+                      currencyOptions={Object.values(CURRENCY_TYPE)}
+                      onValueChange={(oldPrice: number) => handleInputChange('oldPrice', oldPrice)}
+                      onCurrencyChange={(currency: string) => handleInputChange('currency', currency)}
+                      placeholder="e.g. 500000"
+                    />
+                  </FormFieldBox>
+                </div>
+                <FormFieldBox label="Pricing Unit">
+                  <CustomSelect
+                    value={formData.priceFrequency}
+                    options={enumToSelectOptions(PRICE_FREQUENCY)}
+                    onChange={val => handleInputChange('priceFrequency', val)}
+                  />
+                </FormFieldBox>
+                <FormFieldBox label="Status">
+                  <CustomSelect
+                    value={formData.status}
+                    options={enumToSelectOptions(PROPERTY_STATUS)}
+                    onChange={val => handleInputChange('status', val)}
+                  />
+                </FormFieldBox>
+                <FormFieldBox label="Purpose">
+                  <CustomSelect
+                    value={formData.listingPurpose}
+                    options={enumToSelectOptions(LISTING_PURPOSE)}
+                    onChange={val => handleInputChange('listingPurpose', val)}
+                  />
                 </FormFieldBox>
 
-                <FormFieldBox label="Old Price">
-                  <input
-                    type="number"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.oldPrice}
-                    onChange={e => handleInputChange('oldPrice', Number(e.target.value))}
-                    placeholder="e.g. 600000"
-                  />
-                </FormFieldBox>
-
-                <FormFieldBox label="Price Prefix Text (Example: Starting from)">
-                  <input
-                    type="text"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.pricePrefixText}
-                    onChange={e => handleInputChange('pricePrefixText', e.target.value)}
-                    placeholder="Starting from"
-                  />
-                </FormFieldBox>
-                <FormFieldBox label="Price Postfix Text (Example: Per Month)">
-                  <input
-                    type="text"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.pricePostfixText}
-                    onChange={e => handleInputChange('pricePostfixText', e.target.value)}
-                    placeholder="Per Month"
-                  />
-                </FormFieldBox>
-                <FormFieldBox label="Property ID">
-                  <input
-                    type="text"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.propertyId}
-                    onChange={e => handleInputChange('propertyId', e.target.value)}
-                    placeholder="Property ID"
+                <FormFieldBox label="Land Area">
+                  <MeasurementInputWithDropdown
+                    value={formData.landArea}
+                    measurement={formData.landAreaMeasurement}
+                    measurementOptions={Object.values(AREA_MEASUREMENT)}
+                    onValueChange={val => handleInputChange('landArea', val)}
+                    onMeasurementChange={unit => handleInputChange('landAreaMeasurement', unit)}
+                    placeholder="e.g. 1000"
                   />
                 </FormFieldBox>
                 <FormFieldBox label="Property Type">
-                  <select
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.propertyType}
-                    onChange={e => handleInputChange('propertyType', e.target.value)}
-                  >
-                    <option value="sale">Duplex</option>
-                    <option value="rent">Land</option>
-                    <option value="lease">Apartments</option>
-                  </select>
+                  <CustomSelect 
+                    value={formData.propertyType} 
+                    options={enumToSelectOptions(PROPERTY_TYPE)} 
+                    onChange={val => handleInputChange('propertyType', val)} 
+                  />
                 </FormFieldBox>
-                <FormFieldBox label="Status" >
-                  <select
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.status}
-                    onChange={e => handleInputChange('status', e.target.value)}
-                  >
-                    <option value="available" > Available </option>
-                    <option value="pending" > Pending </option>
-                    < option value="sold" > Sold </option>
-                    < option value="rented" > Rented </option>
-                  </select>
-                </FormFieldBox>
+
                 <FormFieldBox label="Location" >
                   <input
-                    className="w-full shadow-md p-2 rounded-md"
+                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                     value={formData.location}
                     onChange={e => handleInputChange('location', e.target.value)}
                     // disabled={true}
-                  />conso
+                  />
                 </FormFieldBox>
-                <FormFieldBox label="Bedroom" >
-                  <select
-                    className="w-full shadow-md p-2 rounded-md"
+                <FormFieldBox label="Bedroom">
+                  <CustomSelect
                     value={formData.bedroom}
-                    onChange={e => handleInputChange('bedroom', e.target.value)}
-                    // disabled={true}
-                  >
-                    <option value="Available" > Available </option>
-                    < option value="Sold" > Sold </option>
-                    < option value="Rented" > Rented </option>
-                  </select>
-                </FormFieldBox>
-                < FormFieldBox label="Land Area Postfix" >
-                  <input
-                    type="number"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.landAreaPostfix}
-                    onChange={e => handleInputChange('landAreaPostfix', e.target.value)
-                    }
-                    placeholder=""
+                    options={BEDROOM_OPTIONS}
+                    onChange={val => handleInputChange('bedroom', val)}
                   />
                 </FormFieldBox>
                 <FormFieldBox label="Garages or Parking spaces">
                   <input
                     type="text"
-                    className="w-full shadow-md p-2 rounded-md"
+                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                     value={formData.garagesOrParkingSpaces}
                     onChange={e => handleInputChange('garagesOrParkingSpaces', e.target.value)}
                     placeholder=""
                   />
                 </FormFieldBox>
-                <FormFieldBox label="Land Area">
-                  <input
-                    type="text"
-                    className="w-full shadow-md p-2 rounded-md"
-                    value={formData.landArea}
-                    onChange={e => handleInputChange('landArea', e.target.value)}
-                    placeholder=""
-                  />
-                </FormFieldBox>
+                
               </div>
             </div>
           )}
@@ -234,7 +226,7 @@ const CreateProperty = () => {
           {currentStep === "Agent & Review" && (
             <PropertyAgentReviewStep
               agentDisplayOption={formData.agentDisplayOption}
-              selectedAgentId={formData.selectedAgentId}
+              selectedAgentId={formData.selectedAgent}
               // reviewNotes={formData.reviewNotes}
               onOptionChange={value => handleInputChange('agentDisplayOption', value)}
               onAgentSelect={id => handleInputChange('selectedAgentId', id)}
