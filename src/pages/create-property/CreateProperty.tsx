@@ -126,7 +126,7 @@ const CreateProperty = () => {
                       currencyOptions={Object.values(CURRENCY_TYPE)}
                       onValueChange={(price: number) => handleInputChange('price', price)}
                       onCurrencyChange={(currency: string) => handleInputChange('currency', currency)}
-                      placeholder="e.g. 500000"
+                      placeholder="e.g. 500,000"
                     />
                   </FormFieldBox>
                   <FormFieldBox label="Old Price">
