@@ -9,7 +9,7 @@ const products = [
 ]
 const DashboardProductCard: React.FC = () => {
   return (
-    <div className="bg-[#171821] p-4 sm:p-6 md:p-8 rounded shadow text-white">
+    <div className="bg-[#171821] p-4 sm:p-6 md:p-8 rounded-xl shadow text-white">
       <h2 className="text-base sm:text-lg font-bold mb-4">Top Products</h2>
 
       <div className="grid grid-cols-3 font-semibold text-xs sm:text-sm mb-2 text-gray-400">

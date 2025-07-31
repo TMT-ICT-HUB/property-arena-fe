@@ -6,12 +6,16 @@ import React from 'react'
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="main w-[80vw] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-      <div className="">
+    <div className="main grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 px-8">
+        <div className="">
         {/* Row 1 */}
-        <div className="grid grid-rows-3 gap-4">
-          <div className="bg-dark-blue p-4 rounded shadow flex flex-col gap-4">
-            <div className="grid gap-4"
+          <div className="flex flex-col gap-4">
+          <div className="bg-dark-blue p-4 rounded-xl shadow flex flex-col gap-4">
+            <div className="property-card-header text-white ">
+              <h3 className='text-2xl font-bold'>Properties</h3>
+              <p className='text-gray-500'>Sales summary</p>
+            </div>
+            <div className="grid gap-4 my-8 mx-2"
               style={{
                 gridTemplateColumns: 'repeat(auto-fit, minmax(8rem, 1fr))',
               }}
@@ -49,14 +53,7 @@ const Dashboard: React.FC = () => {
           {/* Row 3 */}
           <GraphCard />
         </div>
-
-
       </div>
-      {/* <div className="sub w-[15rem]">
-        <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 1</div>
-        <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 2</div>
-        <div className="bg-dark-blue rounded shadow p-4 h-48">Square Card 3</div>
-      </div> */}
       <SubSection />
     </div>
   )

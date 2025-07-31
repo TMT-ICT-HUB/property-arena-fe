@@ -1,4 +1,3 @@
-// src/routes/router.tsx
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import HomePage from '../pages/Homepage';
 import LoginPage from '../pages/Login';
@@ -16,6 +15,7 @@ import PropertyDetailPage from '@/pages/PropertyDetail';
 import LayoutSwitcher from '@/layouts/LayoutSwitcher';
 import Profile from '@/pages/profile/Profile';
 import EditProfile from '@/pages/profile/EditProfile';
+import Subscription from '@/pages/subscription/Subscription';
 
 // const withMainLayout = (
 //   <MainLayout>
@@ -23,11 +23,6 @@ import EditProfile from '@/pages/profile/EditProfile';
 //   </MainLayout>
 // );
 
-// const withMainLayout = (
-//   <MainLayout>
-//     <Outlet />
-//   </MainLayout>
-// );
 
 export const router = createBrowserRouter([
 
@@ -55,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/subscription',
+        element: (
+          <ProtectedRoute fallback={<div>Loading…</div>}>
+            <Subscription />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/create-property',

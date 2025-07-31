@@ -36,14 +36,23 @@ const Login: React.FC = () => {
     <div className="flex items-center justify-center h-screen bg-white flex-col rounded shadow-md">
       <div className="bg-white p-8 shadow-2xl w-full max-w-md">
 
-        <div className="logo h-12 justify-center flex items-center bg-white text-black p-8">
+        {/* <div className="logo h-12 justify-center flex items-center bg-white text-black p-8">
           <img
             src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
             alt="Logo"
             className="h-12 w-12 object-contain"
           />
           <span className="text-xl font-extrabold text-primary-red">PropertyArena</span>
-        </div>
+        </div> */}
+        <Link to="/" className="logo h-12 justify-center flex items-center bg-white text-black mb-4 hover:opacity-80 transition">
+          <img
+            src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
+            alt="Logo"
+            className="h-12 w-12 object-contain"
+          />
+          <span className="text-xl font-extrabold text-primary-red ml-2">PropertyArena</span>
+        </Link>
+
         <form
           onSubmit={onSubmit}
           className="bg-white p-8  w-full max-w-md"

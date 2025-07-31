@@ -45,14 +45,15 @@ const SignUp: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 shadow-2xl w-full max-w-xl rounded">
-        <div className="logo h-12 justify-center flex items-center bg-white text-black mb-4">
+        <Link to="/" className="logo h-12 justify-center flex items-center bg-white text-black mb-4 hover:opacity-80 transition">
           <img
             src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
             alt="Logo"
             className="h-12 w-12 object-contain"
           />
           <span className="text-xl font-extrabold text-primary-red ml-2">PropertyArena</span>
-        </div>
+        </Link>
+
         <form onSubmit={onSubmit} className="space-y-4">
           <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
 
