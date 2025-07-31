@@ -2,10 +2,10 @@ import React from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 
 type Props = {
-  name: string
+  name?: string
   label?: string
   price: string
-  note: string
+  note?: string
   features: [string, string][]
 }
 
