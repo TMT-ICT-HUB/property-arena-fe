@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 interface MeasurementInputProps {
   value: number | string;
@@ -51,9 +52,10 @@ const MeasurementInputWithDropdown: React.FC<MeasurementInputProps> = ({
         <button
           type="button"
           onClick={() => setIsOpen(prev => !prev)}
-          className="h-[80%] px-2 py-1 text-xs font-semibold bg-primary-red text-white rounded border border-primary-red"
+          className="h-[80%] pl-2 pr-2 py-1 text-xs font-semibold bg-primary-red text-white rounded border border-primary-red flex items-center gap-1"
         >
           {measurement.toUpperCase()}
+          <ChevronUpDownIcon className="w-4 h-4" />
         </button>
 
         {isOpen && (
