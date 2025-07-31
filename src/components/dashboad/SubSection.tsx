@@ -107,7 +107,7 @@ const SubSection: React.FC = () => {
         <div className="earning-header flex flex-col justify-start items-start w-[80%]">
           <h3 className="text-white font-semibold mb-1">Earnings</h3>
           <p className="text-gray-400 text-sm mb-2">Total Expense</p>
-          <p className="text-light-cyan text-2xl font-bold">$12,345</p>
+          <p className="text-light-cyan text-2xl font-bold">#12,345</p>
           <p className="text-gray-500 text-sm">Profit is {}% more than last month</p>
         </div>
         <div className="chart-con flex flex-col items-center justify-center">

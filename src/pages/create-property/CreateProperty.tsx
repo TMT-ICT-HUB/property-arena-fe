@@ -74,7 +74,7 @@ const CreateProperty = () => {
             <div className="space-y-4 p-[5%]">
               {/* Full Width Fields */}
               <div className="flex flex-wrap gap-4 mb-6">
-                 <FormFieldBox label="Property Title" fullWidth>
+                 <FormFieldBox label="Property Title *" fullWidth>
                    <input
                      type="text"
                     className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
@@ -84,7 +84,7 @@ const CreateProperty = () => {
                    />
                  </FormFieldBox>
               
-                 <FormFieldBox label="Address" fullWidth>
+                 <FormFieldBox label="Address *" fullWidth>
                    <input
                      type="text"
                     className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
@@ -94,7 +94,7 @@ const CreateProperty = () => {
                    />
                  </FormFieldBox>
               
-                 <FormFieldBox label="Description" fullWidth>
+                 <FormFieldBox label="Description *" fullWidth>
                    <textarea
                     className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
                      rows={4}
@@ -119,7 +119,7 @@ const CreateProperty = () => {
                 </FormFieldBox> */}
 
                 <div className="form-fields-row">
-                  <FormFieldBox label="Sale or Rent Price">
+                  <FormFieldBox label="Sale or Rent Price *">
                     <CurrencyFieldWithToggle
                       value={formData.price || ''}
                       currency={formData.currency || 'NGN'}
@@ -147,7 +147,7 @@ const CreateProperty = () => {
                     onChange={val => handleInputChange('priceFrequency', val)}
                   />
                 </FormFieldBox>
-                <FormFieldBox label="Status">
+                <FormFieldBox label="Status *">
                   <CustomSelect
                     value={formData.status}
                     options={enumToSelectOptions(PROPERTY_STATUS)}
@@ -172,7 +172,7 @@ const CreateProperty = () => {
                     placeholder="e.g. 1000"
                   />
                 </FormFieldBox>
-                <FormFieldBox label="Property Type">
+                <FormFieldBox label="Property Type *">
                   <CustomSelect 
                     value={formData.propertyType} 
                     options={enumToSelectOptions(PROPERTY_TYPE)} 
