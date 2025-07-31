@@ -30,7 +30,11 @@ const tabs = [
   { name: 'Favourites', icon: <FaHeart />, route: '/favourites' },  
 ];
 
-const SideBar: React.FC = () => {
+type SideBarProps = {
+  onClose?: () => void;
+};
+
+const SideBar: React.FC<SideBarProps> = ({onClose}) => {
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
 
@@ -40,6 +44,21 @@ const SideBar: React.FC = () => {
   };
   return (
     <div className="bg-black w-64 text-white min-h-screen">
+      <div className="flex justify-between items-center px-4 py-3 md:hidden">
+        <span className="font-bold">Menu</span>
+        <button onClick={onClose} className="text-white text-xl">
+          ✕
+        </button>
+      </div>
+
+      {/* <div className="logo h-12 mb-8 flex items-center bg-white text-black px-4">
+        <img
+          src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
+          alt="Logo"
+          className="h-12 w-12 object-contain"
+        />
+        <span className="text-xl font-extrabold text-primary-red ml-2">PropertyArena</span>
+      </div> */}
       <div className="logo h-12 mb-8 flex items-center bg-white text-black">
         <img
           src="https://res.cloudinary.com/dhhknhoo2/image/upload/v1751968463/property-arena/LOGO-2_jkdasi.jpg"
