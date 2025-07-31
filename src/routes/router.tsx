@@ -10,18 +10,11 @@ import MainLayout from '@/layouts/MainLayouts';
 import CreateProperty from '@/pages/create-property/CreateProperty';
 import PropertyList from '@/pages/list-property/ListProperty';
 import ListUserProperty from '@/pages/list-property/ListUserProperty';
-import Dashboard from '@/pages/dashboard/Dashboard';
 import EditPropertyPage from '@/pages/EditProperty';
 import PropertyDetailPage from '@/pages/PropertyDetail';
 import LayoutSwitcher from '@/layouts/LayoutSwitcher';
 import Profile from '@/pages/profile/Profile';
 import EditProfile from '@/pages/profile/EditProfile';
-
-// const withMainLayout = (
-//   <MainLayout>
-//     <Outlet />
-//   </MainLayout>
-// );
 
 // const withMainLayout = (
 //   <MainLayout>
