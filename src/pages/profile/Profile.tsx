@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useAuthStore } from '@/store/authStore';
+import React, { useEffect } from 'react';
 import { useUserStore } from '@/store/userStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,7 +45,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <InfoCard label="First Name" value={firstName || '—'} />
         <InfoCard label="Last Name" value={lastName || '—'} />
-        <InfoCard label="Display Name" value={selectedUser.displayName || '—'} />
+        <InfoCard label="Organization Name" value={selectedUser.displayName || '—'} />
         <InfoCard label="Email" value={selectedUser.email} />
         <InfoCard label="Phone" value={selectedUser.phone || '—'} />
         <InfoCard label="Address" value={selectedUser.address || '—'} />

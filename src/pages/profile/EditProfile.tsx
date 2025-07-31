@@ -108,7 +108,7 @@ const EditProfile = () => {
             />
           </FormFieldBox>
 
-          <FormFieldBox label="Display Name" halfWidth>
+          <FormFieldBox label="Organization Name" halfWidth>
             <input
               type="text"
               value={formData.displayName}

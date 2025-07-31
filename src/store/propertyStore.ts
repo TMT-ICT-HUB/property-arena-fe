@@ -118,10 +118,10 @@ export const usePropertyStore = create<PropertyStore>()(
               formData.price > 0 &&
               // formData.oldPrice !== 0 &&
               formData.currency.trim() !== '' &&
-              // formData.priceFrequency.trim() !== '' &&
+              formData.priceFrequency.trim() !== '' &&
               formData.listingPurpose.trim() !== '' &&
               formData.status.trim().toLowerCase() !== '' &&
-              // formData.location.trim().toLowerCase() !== '' &&
+              formData.location.trim().toLowerCase() !== '' &&
               // formData.bedroom.trim().toLowerCase() !== '' &&
               // formData.landArea.trim().toLowerCase() !== '' &&
               // formData.landAreaMeasurement.trim().toLowerCase() !== '' &&

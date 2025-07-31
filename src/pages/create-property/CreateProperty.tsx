@@ -6,13 +6,13 @@ import PropertyAgentReviewStep from "@/components/property/PropertyAgentReviewSt
 import FormFieldBox from "@/components/FormField";
 import { useNavigate } from "react-router-dom";
 import { AREA_MEASUREMENT, LISTING_PURPOSE, PRICE_FREQUENCY, PROPERTY_STATUS, PROPERTY_TYPE } from "@/types";
-import { useState } from "react";
 import { CurrencyFieldWithToggle } from "@/components/dropdowns/CurrencyDropdown";
 import MeasurementInputWithDropdown from "@/components/dropdowns/MeasurementDropdown";
 import { CURRENCY_TYPE } from "@/types";
 import CustomSelect from "@/components/dropdowns/CustomSelect";
 import { enumToSelectOptions } from "@/utils/enumToSelectOptions";
 import { BEDROOM_OPTIONS } from "@/types/options";
+import LocationDropdown from "./LocationDropdown";
 
 const CreateProperty = () => {
   const {
@@ -140,7 +140,7 @@ const CreateProperty = () => {
                     />
                   </FormFieldBox>
                 </div>
-                <FormFieldBox label="Pricing Unit">
+                <FormFieldBox label="Pricing Unit *">
                   <CustomSelect
                     value={formData.priceFrequency}
                     options={enumToSelectOptions(PRICE_FREQUENCY)}
@@ -154,7 +154,7 @@ const CreateProperty = () => {
                     onChange={val => handleInputChange('status', val)}
                   />
                 </FormFieldBox>
-                <FormFieldBox label="Purpose">
+                <FormFieldBox label="Purpose *">
                   <CustomSelect
                     value={formData.listingPurpose}
                     options={enumToSelectOptions(LISTING_PURPOSE)}
@@ -169,7 +169,7 @@ const CreateProperty = () => {
                     measurementOptions={Object.values(AREA_MEASUREMENT)}
                     onValueChange={val => handleInputChange('landArea', val)}
                     onMeasurementChange={unit => handleInputChange('landAreaMeasurement', unit)}
-                    placeholder="e.g. 1000"
+                    placeholder="e.g. 100 sqm"
                   />
                 </FormFieldBox>
                 <FormFieldBox label="Property Type *">
@@ -180,14 +180,13 @@ const CreateProperty = () => {
                   />
                 </FormFieldBox>
 
-                <FormFieldBox label="Location" >
-                  <input
-                    className="w-full shadow-md p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-primary-red"
+                <FormFieldBox label="Location *">
+                  <LocationDropdown
                     value={formData.location}
-                    onChange={e => handleInputChange('location', e.target.value)}
-                    // disabled={true}
+                    onChange={(val) => handleInputChange('location', val)}
                   />
                 </FormFieldBox>
+
                 <FormFieldBox label="Bedroom">
                   <CustomSelect
                     value={formData.bedroom}
